@@ -5,7 +5,22 @@ import joblib
 import time
 
 # Load trained model
-model = joblib.load("random_forest_model.pkl")
+import joblib
+import urllib.request
+import os
+
+# File path and Google Drive link
+model_path = "model.pkl"
+drive_file_id = "1ZJVlr5JZUhvIYVGwlcdlfFXdjsVO7akA"
+url = f"https://drive.google.com/uc?id={drive_file_id}"
+
+# Download the model if not already downloaded
+if not os.path.exists(model_path):
+    urllib.request.urlretrieve(url, model_path)
+
+# Load model
+model = joblib.load(model_path)
+
 
 # Page configuration
 st.set_page_config(page_title="SoC Simulator", layout="centered")
